@@ -41,18 +41,25 @@ func twoSumBruteForce(_ nums: [Int], _ target: Int) -> [Int] {
 //print(twoSumBruteForce([2,7,11,15], 9))  // TC - O(N^2)
 
 func twoSumOptimised(_ nums: [Int], _ target: Int) -> [Int] {
-    var hashTable = [Int:Int]()
+
+    var hashmap = [Int:Int]()
     for i in 0..<nums.count{
-        hashTable[nums[i]] = i
+        let lookup = target - nums[i]
+        if let index = hashmap[lookup]{
+            return [i, index]
+        }
+        hashmap[nums[i]] = i
     }
     
-    for j in 0..<nums.count{
-        let lookUp = target - nums[j]
-        if let indice = hashTable[lookUp]{
-            return [j, indice]
-        }
-    }
     return [-1]
 }
 
-print(twoSumOptimised([2,7,11,15], 9))  // TC - O(N)
+print(twoSumOptimised([3,3], 6))  // TC - O(N)
+
+/*
+ Test cases
+ Inputs, Target, Output
+ [2,7,11,15], 9 , [0,1]
+ [3,2,4], 6 , [1,2]
+ [3,3],  6 , [0,1]
+ */
